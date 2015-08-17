@@ -1,22 +1,17 @@
+require "ostruct"
+
 module Hastings
-  # Each task gets its own variable scope stored in this object
-  class VariableScope
-    def initialize
-      @variables = {}
-    end
+  class Dsl
+    # Scopes variables locally by use of "var"
+    module VariableScope
+      attr_reader :var
 
-    def self.method_missing(sym, argument)
-      str = sym.to_s
-      if /=$/ =~ str
-        @variables[no_equals(str)] = argument
-      else @variables[sym]
+      def initialize
+        @var = OpenStruct.new
+        super()
       end
     end
 
-    private
-
-      def no_equals(str)
-        str[0..-2].to_sym
-      end
+    include VariableScope
   end
 end

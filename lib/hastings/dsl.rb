@@ -1,13 +1,10 @@
-require "hastings/dsl/variable_scope"
+Dir[File.expand_path("../dsl/*", __FILE__)].each(&method(:require))
 
 module Hastings
-  # DSL proxy
+  # Dsl proxy - runs all scripts via the Dsl
   class Dsl
-    attr_reader :var
-
-    def initialize(&block)
-      @var = VariableScope.new
-      instance_eval(&block)
+    def self.call(&block)
+      new.instance_eval(&block)
     end
   end
 end

@@ -1,15 +1,20 @@
+require "virtus"
 require "hastings/dsl"
 
 module Hastings
   # Assign things
   class Script
-    Meta = OpenStruct.new do
-      def run_at=(date_time)
-        super DateTime.parse(date_time)
-      end
+    # A holder for our data
+    class Meta
+      include Virtus.model
+      attribute :name, String
+      attribute :description, String, default: ""
+      attribute :run_every, Integer, default: 0
+      attribute :run_at, DateTime
 
+      attr_reader :run
       def run=(&block)
-        super(&block)
+        @run = block
       end
     end
 
@@ -18,18 +23,15 @@ module Hastings
     def initialize(&block)
       @meta = Meta.new
       instance_eval(&block)
-      @meta.freeze
+      meta.freeze
     end
 
-    def execute
-      Dsl.new(&@meta.run)
+    def call
+      Dsl.call(&meta.run)
     end
 
-    def method_missing(method, *args)
-      if [:name, :description, :run_every, :run_at, :run].include? method
-        @meta.send("#{method}=", *args)
-      else super
-      end
+    def method_missing(method, *args, &block)
+      meta.send("#{method}=", *args, &block)
     end
   end
 end

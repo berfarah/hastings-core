@@ -15,10 +15,10 @@ describe Hastings::Script do
     end
   end
 
-  describe "#run" do
+  describe "#call" do
     it "executes the code via the DSL" do
-      expect(Hastings::Dsl).to receive(:new)
-      subject.run
+      expect(Hastings::Dsl).to receive(:call)
+      subject.call
     end
   end
 

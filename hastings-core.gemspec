@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = "hastings-core"
-  spec.version       = "0.0.1"
+  spec.version       = "0.1.0"
   spec.authors       = ["Bernardo Farah"]
   spec.email         = ["ber@bernardo.me"]
 
@@ -14,6 +14,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "virtus"
+  spec.add_dependency "activesupport"
   spec.add_development_dependency "bundler", "~> 1.10"
   spec.add_development_dependency "activesupport", "~> 4.2"
   spec.add_development_dependency "yard", "~> 0.8"
