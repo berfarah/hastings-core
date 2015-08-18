@@ -15,7 +15,7 @@ module Hastings
       end
 
       def time_range(from, to)
-        DateTimeRange.new time(from), to(to)
+        DateTimeRange.new time(from), time(to)
       end
 
       private

@@ -87,9 +87,8 @@ describe Hastings::Dsl::DateTime do
   end
 
   # Running into a weird method-error bug here
-  describe "#time_range", skip: true do
+  describe "#time_range" do
     subject { super().time_range(arg, arg).start }
-    let(:arg) {}
 
     context "given dates" do
       let(:arg) { Date.today }
