@@ -12,7 +12,7 @@ module Hastings
 
       attr_reader :run, :source
       def run=(&block)
-        @source = File.absolute_path(block.to_s[/@(.*):/, 1])
+        @source = File.absolute_path(block.source_location.first)
         @run = block
       end
     end
