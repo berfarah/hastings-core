@@ -1,4 +1,4 @@
-Dir[File.expand_path("../dsl/*", __FILE__)].each(&method(:require))
+require_relative "dsl/meta_proxy"
 
 module Hastings
   # Dsl proxy - runs all scripts via the Dsl
@@ -12,9 +12,5 @@ module Hastings
     def run
       instance_eval(&meta.run)
     end
-  end
-
-  def self.new(&block)
-    Dsl.new(&block)
   end
 end

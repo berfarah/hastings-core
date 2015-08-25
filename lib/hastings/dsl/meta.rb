@@ -10,8 +10,9 @@ module Hastings
       attribute :run_every, ::Integer, default: 0
       attribute :run_at, ::DateTime
 
-      attr_reader :run
+      attr_reader :run, :source
       def run=(&block)
+        @source = File.absolute_path(block.to_s[/@(.*):/, 1])
         @run = block
       end
     end

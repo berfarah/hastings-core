@@ -1,3 +1,5 @@
+require_relative "meta"
+
 module Hastings
   class Dsl
     class MetaProxy

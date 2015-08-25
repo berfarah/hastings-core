@@ -11,6 +11,10 @@ describe Hastings::Dsl do
     end
   end
 
+  before do
+    allow_any_instance_of(Kernel).to receive(:p).and_return("I am in a proc")
+  end
+
   describe "#run" do
     it "executes the code via the DSL" do
       expect_any_instance_of(Hastings::Dsl).to receive(:p)
